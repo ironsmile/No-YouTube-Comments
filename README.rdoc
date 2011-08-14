@@ -1,0 +1,5 @@
+Two chrome extensions. If you want to install them use:
+
+ * No YouTube Comments - https://chrome.google.com/webstore/detail/hbeblcelbmadebneggicbpkjhlppjoen
+ * No YOuRUbe Comments Button - https://chrome.google.com/webstore/detail/bfjhnoamjmjhgiigohhkofagecckdjha
+

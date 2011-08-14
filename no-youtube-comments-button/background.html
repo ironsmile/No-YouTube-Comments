@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type="text/javascript">
+
+// Prod:
+var no_comments_extension = "hbeblcelbmadebneggicbpkjhlppjoen";
+
+// Dev:
+//var no_comments_extension = "pfcpjoblnhngmkjijmdnkpjoflljmhfk";
+
+var comments_on = false;
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+
+  chrome.extension.sendRequest(no_comments_extension, {toggle: true}, function(response) {});
+  
+  
+});
+
+</script>
+</head>
+<body />
+</html>

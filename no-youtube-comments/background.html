@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript">
+chrome.extension.onRequest.addListener(
+  function(request, sender, sendResponse) {
+    
+    if (request.give)
+      sendResponse(localStorage[request.give]);
+    else
+      sendResponse({'asdf':true}); // snub them.
+      
+  });
+
+chrome.extension.onRequestExternal.addListener(
+  function (request, sender, sendResponse) {
+    
+    if (request.toggle) {
+      chrome.tabs.executeScript(null, {code:"toggle_comments()"});
+    }
+    
+    sendResponse({asdf:true});
+  });
+
+</script>
+</head>
+<body />
+</html>

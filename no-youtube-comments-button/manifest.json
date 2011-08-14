@@ -1,0 +1,19 @@
+{
+  "name": "Button for No YouTube Comments",
+  "version": "0.6",
+
+  "description": "Button that toggles No Comments extension on and off",
+  "background_page" : "background.html",
+  
+  "icons": { 
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png" 
+  },
+  
+  "browser_action": {
+    "default_icon": "images/icon19.png", 
+    "default_title": "Toggle YouTube comemnts"
+  }
+}
+

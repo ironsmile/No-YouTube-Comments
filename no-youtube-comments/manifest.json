@@ -1,0 +1,27 @@
+{
+  "name": "No YouTube Comments",
+  "version": "0.5",
+
+  "description": "Removes all YouTube comments from the page.",
+
+  "content_scripts": [
+        {
+            "matches": ["http://www.youtube.com/watch?*"],
+            "js": ["extension.js"]
+        }
+    ],
+  "background_page" : "background.html",
+  "options_page" : "options.html",
+  
+  "icons": { 
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png" 
+  },
+  
+  "permissions": [
+    "http://www.youtube.com/",
+    "tabs"
+  ]
+}
+
