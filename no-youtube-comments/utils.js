@@ -1,11 +1,17 @@
 
+options = ["vid_responses", "show_button"];
+
 function restore_options(){
-  document.getElementById("vid_responses").checked = localStorage["vid_responses"];
+  for (var i = 0; i < options.length; i++) {
+    document.getElementById(options[i]).checked = localStorage[options[i]] == "true";
+  }
 }
 
 function save_options(){
-  var vr = document.getElementById("vid_responses");
-  localStorage["vid_responses"] = vr.checked;
+  
+  for (var i = 0; i < options.length; i++) {
+    localStorage[options[i]] = document.getElementById(options[i]).checked;
+  }
 
   // Update status to let user know options were saved.
   var status = document.getElementById("status");

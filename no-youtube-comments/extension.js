@@ -1,10 +1,37 @@
+
 comments_shown = false;
 show_responses = false;
+show_comments_button = false;
+
+/**
+ *
+ *  Main:
+ *
+ */
 
 chrome.extension.sendRequest({give: "vid_responses"}, function(response) {
     show_responses = response;
     hide_comments(response);
 });
+
+chrome.extension.sendRequest({give: "show_button"}, function(response) {
+    if (response == "true") {
+        document.getElementById('watch-actions').innerHTML += ' \
+        <button id="comments-toggle" class="yt-uix-button yt-uix-tooltip">Comments</button>';
+        
+        document.getElementById('comments-toggle').onclick = function (e) {
+            toggle_comments();
+        }
+    }
+});
+
+
+/**
+ *
+ *  Functions:
+ *
+ */
+
 
 function hide(e) {
   e.old_style = e.style.display;
@@ -19,36 +46,61 @@ function what_to_hide(vid_responses) {
     
     var to_hide = [];
     
-    var c = document.getElementById("watch-comment-panel");
+    var really_old = document.getElementById("watch-comment-panel");
+    var cosmic = document.getElementById('watch-comments');
+    
+    if(really_old){ // REALLY REALLY old youtube. Noone should see it.
+        
+        to_hide[to_hide.length] = really_old;
 
-    if(!c){ // the new interface
+    } else if (cosmic) { // Cosmic panda youtube
+      
+      to_hide = select_to_hide(
+            vid_responses,
+            ["comments-loading"],
+            'watch-comments'
+        );
         
-        if(vid_responses == "true"){ // make sure the video responses are shown
+    } else { // Current youtube
         
-            c = document.getElementsByClassName("comments-section");
-            for(var i=0; i<c.length; i++){ // so we want to leave the Response button
-            
-                if( !c[i].innerHTML.match(/<h4>\s*Video Responses\s*<\/h4>/) ){
-                    to_hide[to_hide.length] = c[i];
-                }
-            }
-            
-            to_hide[to_hide.length] = document.getElementById("comments-post"); // post comment button
-            to_hide[to_hide.length] = document.getElementById("comments-actions"); // ... uh... stuff
-            to_hide[to_hide.length] = document.getElementById("comments-loading"); // stuff 2
-            
-        } else { // hide everything
+        to_hide = select_to_hide(
+            vid_responses,
+            ["comments-post", "comments-actions", "comments-loading"],
+            'watch-discussion'
+        );
         
-            to_hide[to_hide.length] = document.getElementById("watch-discussion");
-        }   
-
-    } else { // old youtube. Don't know if anyone still sees it but am keeping it just to be sure
-        to_hide[to_hide.length] = c;
     }
     
     return to_hide;
     
 }
+
+function select_to_hide (vid_responses, what_if_responses, what_if_no_responses) {
+    
+    var to_hide = [];
+
+    if(vid_responses == "true"){ // make sure the video responses are shown
+    
+        var c = document.getElementsByClassName("comments-section");
+        for(var i=0; i<c.length; i++){ // so we want to leave the Response button
+        
+            if( !c[i].innerHTML.match(/<h4>\s*Video Responses\s*<\/h4>/) ){
+                to_hide[to_hide.length] = c[i];
+            }
+        }
+        
+        for (var i=0; i < what_if_responses.length; i++) {
+            to_hide[to_hide.length] = document.getElementById(what_if_responses[i]);
+        }
+        
+    } else { // hide everything
+    
+        to_hide[to_hide.length] = document.getElementById(what_if_no_responses);
+    }
+
+    return to_hide;
+}
+
 
 function hide_comments(vid_responses){
   var to_hide = what_to_hide(vid_responses);
@@ -65,7 +117,6 @@ function show_comments(vid_responses){
 }
 
 function toggle_comments() {
-  console.log("toggle message received");
   
   if (comments_shown) {
     hide_comments(show_responses);
