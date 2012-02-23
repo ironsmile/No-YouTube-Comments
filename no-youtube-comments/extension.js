@@ -16,12 +16,19 @@ chrome.extension.sendRequest({give: "vid_responses"}, function(response) {
 
 chrome.extension.sendRequest({give: "show_button"}, function(response) {
     if (response == "true") {
-        document.getElementById('watch-actions').innerHTML += ' \
-        <button id="comments-toggle" class="yt-uix-button yt-uix-tooltip">Comments</button>';
-        
-        document.getElementById('comments-toggle').onclick = function (e) {
+        var btn = document.createElement('button');
+        btn.id ='comments-toggle';
+        btn.className = 'yt-uix-button yt-uix-tooltip';
+
+        var txt = document.createTextNode('Comments');
+        btn.appendChild(txt);
+        btn.onclick = function (e) {
             toggle_comments();
         }
+
+        document.getElementById('watch-actions').appendChild(btn);
+        
+        
     }
 });
 
