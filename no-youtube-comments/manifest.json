@@ -1,12 +1,13 @@
 {
   "name": "No YouTube Comments",
-  "version": "1.2",
+  "version": "1.2.1",
 
   "description": "Removes all YouTube comments from the page.",
 
   "content_scripts": [
         {
-            "matches": ["http://www.youtube.com/watch?*"],
+            "matches": ["http://www.youtube.com/watch?*", 
+                        "https://www.youtube.com/watch?*"],
             "js": ["extension.js"]
         }
     ],
