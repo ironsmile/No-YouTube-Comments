@@ -18,8 +18,8 @@ chrome.extension.sendRequest({give: "show_button"}, function(response) {
     if (response == "true") {
         var btn = document.createElement('button');
         btn.id ='comments-toggle';
-        btn.className = 'yt-uix-button yt-uix-tooltip';
-
+        //btn.className = 'yt-uix-button yt-uix-tooltip yt-uix-button-default';
+        btn.className =  'yt-uix-tooltip-reverse  yt-uix-button yt-uix-button-default yt-uix-tooltip';
         var txt = document.createTextNode('Comments');
         btn.appendChild(txt);
         btn.onclick = function (e) {
@@ -41,11 +41,19 @@ chrome.extension.sendRequest({give: "show_button"}, function(response) {
 
 
 function hide(e) {
+  console.log(e);
+  if (!e) {
+    return;
+  }
   e.old_style = e.style.display;
   e.style.display = "none";
 }
 
 function show(e) {
+  console.log(e);
+  if (!e) {
+    return;
+  }
   e.style.display = (e.old_style) ? e.old_style : "";
 }
 
