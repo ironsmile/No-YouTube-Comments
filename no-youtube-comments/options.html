@@ -6,12 +6,24 @@
   <body onload="restore_options()">
 
   <p>
-    <label for="vid_responses">Show Video Responses:</label>
-    <input type="checkbox" id="vid_responses" onchange="save_options()" onclick="save_options()" />
+    <label for="vid_responses"><strong>Show Video Responses:</strong></label>
+    <input type="checkbox" disabled="true" />
+    <!--
+    <input type="checkbox" 
+          id="vid_responses" 
+          onchange="save_options()" 
+          onclick="save_options()" 
+    />
+    -->
   <p>
 
   <p>
-    <label for="show_button">Comments Toggle Button:</label>
+    The YouTube guys have made it harder for me to show video responses while still hiding
+    the comments. This feature will be back with the next patch.
+  </p>
+
+  <p>
+    <label for="show_button"><strong>Comments Toggle Button:</strong></label>
     <input type="checkbox" id="show_button" onchange="save_options()" onclick="save_options()" />
   <p>
 
